@@ -1,3 +1,6 @@
+To run, I loaded the project onto a tomcat server, then ran http://localhost:8080/CarLibrary.  Let me know
+if you need it in any other format
+
 A few notes about the solution.
 
 1) I spent quite a while trying to work out what was going on with the weird image issue.  At first I thought
