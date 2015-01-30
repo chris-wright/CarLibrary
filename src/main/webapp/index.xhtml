@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel id="requestPanel" header="Car Library" styleClass="headerStyle" style="margin-bottom:10px;" rendered="#{!requestBean.showImages}" >
+			<p:messages id="messages" />
+			<h:panelGrid columns="2" cellpadding="10" styleClass="borderlessPanelGrid">
+				<h:outputLabel for="ref" value="Stock Reference:" />
+				<p:inputText id="ref" required="true" requiredMessage="Please enter a valid (13 character) Stock Reference"
+					value="#{requestBean.stockRef}" label="Stock Reference">
+					<f:validateLength minimum="12" maximum="13" />
+				</p:inputText>
+					
+				<p:outputLabel for="plate" value="Licence Plate:" />
+				<p:inputText id="plate" required="true" requiredMessage="Please enter a valid licence plate" value="#{requestBean.plate}" label="Licence Plate" >
+					<f:validateLength minimum="6" maximum="7" />
+				</p:inputText>
+			</h:panelGrid>
+		</p:panel>
+		<p:panel id="displayPanel" header="Images" rendered="#{requestBean.showImages}" >
+			<p:panelGrid columns="2" rows="3" cellpadding="20" styleClass="borderlessPanelGrid">
+				<h:outputLabel value="Stock Reference: " />
+				<h:outputLabel value="#{requestBean.stockRef}" style="font-weight: 600;" />
+				<h:outputLabel value="Plate: " />
+				<h:outputLabel value="#{requestBean.plate}" style="font-weight: 600;" />
+				<h:outputLabel value="Image Size: " />
+				<p:selectOneRadio id="sizeRadio" value="#{requestBean.imageSize}" >
+					<p:ajax update="@form" />
+            		<f:selectItem itemLabel="Small" itemValue="S" />
+            		<f:selectItem itemLabel="Large" itemValue="L" />
+        		</p:selectOneRadio>
+        		<f:facet name="footer">
+					<p:galleria id="smallGall" value="#{requestBean.smallLinks}" var="image" panelWidth="350" panelHeight="263" transitionInterval="300000" rendered="#{requestBean.showSmallImages}" >
+		    			<p:graphicImage url="#{image}" alt="Image Description for #{image}" title="#{image}"/>
+					</p:galleria>
+					<p:galleria id="largeGall" value="#{requestBean.largeLinks}" var="image" panelWidth="800" panelHeight="600" transitionInterval="300000" rendered="#{!requestBean.showSmallImages}" >
+		    			<p:graphicImage url="#{image}" alt="Image Description for #{image}" title="#{image}"/>
+					</p:galleria>
+				</f:facet>
+			</p:panelGrid>
+		</p:panel>
+
+		<p:commandButton value="Submit" update="@form, smallGall, largeGall" process="@form" actionListener="#{requestBean.doRequest}" rendered="#{!requestBean.showImages}" styleClass="button">
+			<p:ajax update="@form" />
+		</p:commandButton>
+	 	<p:commandButton value="Search Again" update="@form, smallGall, largeGall" actionListener="#{requestBean.back}" rendered="#{requestBean.showImages}" styleClass="button">
+			<p:ajax update="@form" />
+	 	</p:commandButton>
+	
+	</h:form>
+
+</h:body>
+</html>

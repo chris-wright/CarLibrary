@@ -1,0 +1,25 @@
+A few notes about the solution.
+
+1) I spent quite a while trying to work out what was going on with the weird image issue.  At first I thought
+it was intermittent, which it was.  As soon as you flick from either small to large and back again, or the opposite, 
+the images return to normal.  However, on first view, a lot of the time the images seem overly magnified and stretched.
+I suspect this is down to the Primefaces Galleria component, as the URLs look perfectly fine, as do the sizes I'm 
+passing in.  However, I noticed this late, and thought I'd explain my actions, rather than spend a few more hours 
+trying to put together a more manual solution.
+2) I've tried to put together an Arnold Clark-like colour scheme to the app, and was going to go further, but didn't 
+think I'd be getting too many marks for artistic impression.  Some of the CSS is "inspired" by the CSS from the main
+site, but I haven't gone too far with that.
+3) I wasn't quite sure from the description whether or not we were supposed to show all twelve images for each size, 
+even if one didn't exist.  However, unless I'm missing something, I see no way (as it stands at the moment) for the
+app to be able to tell whether or not an image "exists".  As far as it's concerned, an image always exists, even if
+it's the default one.  I'm guessing the default image was only mentioned just as background, but all twelve images are
+included in the slideshow on the app.  A future improvement I'd suggest would be just to show the images we have, but 
+like I say, I don't think that would be possible as things are currently.
+4) I commented in the code, but may as well mention here.  In the spec six camera options were mentioned, but in the
+worked example 12 were used.  I made the decision to use all 12.
+5) I've appbundled up some of the strings, as it was something we made use of in my current role.  Might be overkill 
+for such a small app, but I think it makes good practice, giving a central point to alter strings, and make future 
+translation easier.
+6) At the moment I see no way of truly validating user input.  I've got it checking that the input is the right length 
+but if they enter a string that looks right, but has no match in the database, then it will still try and load images 
+and give you back 24 "coming soon" images.  I guess that would be a future improvement.
