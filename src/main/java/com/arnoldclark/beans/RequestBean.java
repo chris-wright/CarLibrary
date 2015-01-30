@@ -1,4 +1,4 @@
-package beans;
+package com.arnoldclark.beans;
 
 import java.net.URI;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import objects.URLBuilder;
+import com.arnoldclark.objects.URLBuilder;
 
 @ManagedBean(name = "requestBean")
 @SessionScoped
@@ -32,6 +32,19 @@ public class RequestBean {
 		showImages = false;
 		imageSize = "S";
 		showSmallImages = true;
+	}
+
+	public void doRequest() {
+		if(!showImages) {
+			showImages = true;
+			setLinks(urlBuilder.getAllLinks(stockRef, plate));
+			setSmallLinks(urlBuilder.getSmallLinks(stockRef, plate));
+			setLargeLinks(urlBuilder.getLargeLinks(stockRef, plate));
+		}
+	}
+	
+	public void back() {
+		showImages = false;
 	}
 	
 	public String getStockRef() {
@@ -61,19 +74,6 @@ public class RequestBean {
 
 	public void setShowImages(boolean showImages) {
 		this.showImages = showImages;
-	}
-
-	public void doRequest() {
-		if(!showImages) {
-			showImages = true;
-			setLinks(urlBuilder.getAllLinks(stockRef, plate));
-			setSmallLinks(urlBuilder.getSmallLinks(stockRef, plate));
-			setLargeLinks(urlBuilder.getLargeLinks(stockRef, plate));
-		}
-	}
-	
-	public void back() {
-		showImages = false;
 	}
 
 	public List<URI> getLinks() {

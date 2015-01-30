@@ -1,4 +1,4 @@
-package objects;
+package com.arnoldclark.objects;
 
 public enum Size {
 	

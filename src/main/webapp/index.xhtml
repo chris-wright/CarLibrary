@@ -12,26 +12,31 @@
 </h:head>
 <h:body>
 	<h:form>
-		<p:panel id="requestPanel" header="Car Library" styleClass="headerStyle" style="margin-bottom:10px;" rendered="#{!requestBean.showImages}" >
+		<p:panel id="requestPanel" header="#{appbundle.lblHeader}" styleClass="headerStyle" style="margin-bottom:10px;" rendered="#{!requestBean.showImages}" >
 			<p:messages id="messages" />
-			<h:panelGrid columns="2" cellpadding="10" styleClass="borderlessPanelGrid">
-				<h:outputLabel for="ref" value="Stock Reference:" />
-				<p:inputText id="ref" required="true" requiredMessage="Please enter a valid (13 character) Stock Reference"
-					value="#{requestBean.stockRef}" label="Stock Reference">
+			<p:outputPanel deferred="true" style="margin-bottom: 50px">
+        		<h:outputLabel value="#{appbundle.lblExplanation}"/>
+    		</p:outputPanel>
+			<h:panelGrid columns="3" cellpadding="10" styleClass="borderlessPanelGrid">
+				<h:outputLabel for="ref" value="#{appbundle.lblStockReference}: " style="font-weight: 600" />
+				<p:inputText id="ref" required="true" requiredMessage="#{appbundle.lblValidStockRefWarning}"
+					value="#{requestBean.stockRef}" label="#{appbundle.lblStockReference}">
 					<f:validateLength minimum="12" maximum="13" />
 				</p:inputText>
+				<h:outputLabel value="#{appbundle.lblStockReferenceFormat}"/>
 					
-				<p:outputLabel for="plate" value="Licence Plate:" />
-				<p:inputText id="plate" required="true" requiredMessage="Please enter a valid licence plate" value="#{requestBean.plate}" label="Licence Plate" >
+				<h:outputLabel for="plate" value="#{appbundle.lblLicencePlate}: " style="font-weight: 600" />
+				<p:inputText id="plate" required="true" requiredMessage="#{appbundle.lblValidLicencePlateWarning}" value="#{requestBean.plate}" label="#{appbundle.lblLicencePlate}" >
 					<f:validateLength minimum="6" maximum="7" />
 				</p:inputText>
+				<h:outputLabel value="#{appbundle.lblLicencePlateFormat}"/>
 			</h:panelGrid>
 		</p:panel>
 		<p:panel id="displayPanel" header="Images" rendered="#{requestBean.showImages}" >
 			<p:panelGrid columns="2" rows="3" cellpadding="20" styleClass="borderlessPanelGrid">
-				<h:outputLabel value="Stock Reference: " />
+				<h:outputLabel value="#{appbundle.lblStockReference}: " />
 				<h:outputLabel value="#{requestBean.stockRef}" style="font-weight: 600;" />
-				<h:outputLabel value="Plate: " />
+				<h:outputLabel value="#{appbundle.lblLicencePlate}: " />
 				<h:outputLabel value="#{requestBean.plate}" style="font-weight: 600;" />
 				<h:outputLabel value="Image Size: " />
 				<p:selectOneRadio id="sizeRadio" value="#{requestBean.imageSize}" >
@@ -41,19 +46,19 @@
         		</p:selectOneRadio>
         		<f:facet name="footer">
 					<p:galleria id="smallGall" value="#{requestBean.smallLinks}" var="image" panelWidth="350" panelHeight="263" transitionInterval="300000" rendered="#{requestBean.showSmallImages}" >
-		    			<p:graphicImage url="#{image}" alt="Image Description for #{image}" title="#{image}"/>
+		    			<p:graphicImage url="#{image}" alt="#{image}" title="#{image}" width="350" height="263" />
 					</p:galleria>
 					<p:galleria id="largeGall" value="#{requestBean.largeLinks}" var="image" panelWidth="800" panelHeight="600" transitionInterval="300000" rendered="#{!requestBean.showSmallImages}" >
-		    			<p:graphicImage url="#{image}" alt="Image Description for #{image}" title="#{image}"/>
+		    			<p:graphicImage url="#{image}" alt="#{image}" title="#{image}" width="800" height="600" />
 					</p:galleria>
 				</f:facet>
 			</p:panelGrid>
 		</p:panel>
 
-		<p:commandButton value="Submit" update="@form, smallGall, largeGall" process="@form" actionListener="#{requestBean.doRequest}" rendered="#{!requestBean.showImages}" styleClass="button">
+		<p:commandButton value="#{appbundle.lblSubmit}" update="@form, smallGall, largeGall" process="@form" actionListener="#{requestBean.doRequest}" rendered="#{!requestBean.showImages}" styleClass="button">
 			<p:ajax update="@form" />
 		</p:commandButton>
-	 	<p:commandButton value="Search Again" update="@form, smallGall, largeGall" actionListener="#{requestBean.back}" rendered="#{requestBean.showImages}" styleClass="button">
+	 	<p:commandButton value="#{appbundle.lblSearchAgain}" update="@form, smallGall, largeGall" actionListener="#{requestBean.back}" rendered="#{requestBean.showImages}" styleClass="button">
 			<p:ajax update="@form" />
 	 	</p:commandButton>
 	

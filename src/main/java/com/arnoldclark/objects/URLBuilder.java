@@ -1,4 +1,4 @@
-package objects;
+package com.arnoldclark.objects;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.utils.URIBuilder;
+
+import com.arnoldclark.utils.SessionUtil;
 
 public class URLBuilder {
 
@@ -76,21 +78,16 @@ public class URLBuilder {
 		// 4 to 12.  I notice that numbers 7 to 12 are set to coming soon, but including them
 		// anyway
 		for(Camera camera : Camera.values()) {
-			StringBuilder builder = new StringBuilder();
-			builder.append("http://vcache.arnoldclark.com/imageserver/");
-			builder.append(buildObfuscatedStockReference(stockReference, plate));
-
 			URIBuilder uriBuilder = new URIBuilder()
-			.setScheme("http")
-			.setHost("vcache.arnoldclark.com")
-			.setPath("/imageserver/" + buildObfuscatedStockReference(stockReference, plate) + "/" + size.getSize() + "/" + camera.getValue());
-
+			.setScheme(SessionUtil.getResourceBundleValue("lblScheme"))
+			.setHost(SessionUtil.getResourceBundleValue("lblHost"))
+			.setPath("/" + SessionUtil.getResourceBundleValue("lblServer") + "/" + buildObfuscatedStockReference(stockReference, plate) + "/" + size.getSize() + "/" + camera.getValue());
+			
 			URI uri;
 			try {
 				uri = uriBuilder.build();
 				uris.add(uri);
 			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

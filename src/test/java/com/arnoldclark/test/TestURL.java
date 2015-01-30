@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 import java.net.URI;
 import java.util.List;
 
-import objects.URLBuilder;
-
 import org.junit.Test;
+
+import com.arnoldclark.objects.URLBuilder;
 
 public class TestURL {
 	
