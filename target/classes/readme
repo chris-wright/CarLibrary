@@ -5,7 +5,8 @@ it was intermittent, which it was.  As soon as you flick from either small to la
 the images return to normal.  However, on first view, a lot of the time the images seem overly magnified and stretched.
 I suspect this is down to the Primefaces Galleria component, as the URLs look perfectly fine, as do the sizes I'm 
 passing in.  However, I noticed this late, and thought I'd explain my actions, rather than spend a few more hours 
-trying to put together a more manual solution.
+trying to put together a more manual solution.  I did initially have one image shown on the screen, with navigation 
+buttons below, but this was very cumbersome, and was before I moved to the much nicer looking Galleria.  
 2) I've tried to put together an Arnold Clark-like colour scheme to the app, and was going to go further, but didn't 
 think I'd be getting too many marks for artistic impression.  Some of the CSS is "inspired" by the CSS from the main
 site, but I haven't gone too far with that.
